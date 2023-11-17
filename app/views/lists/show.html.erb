@@ -1,0 +1,6 @@
+<h1>La show</h1>
+
+<p>name : <%= @list.name %></p>
+<%= link_to "See all of your lists", root_path(@lists) %>
+
+<%= link_to "add a movie", new_list_bookmark_path(@list) %>
