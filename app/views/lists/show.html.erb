@@ -1,20 +1,23 @@
 
 <h2 class="text-center"><%= @list.name %> list</h2>
+<div class="d-flex justify-center">
+  <div>
+    <%# <ul class=" row d-flex list-group mb-5"> %>
+      <% @list.bookmarks.each do |bookmark| %>
+      <div class="col-6">
+        <%= image_tag bookmark.movie.poster_url, alt: bookmark.movie.title, class: "movie-img rounded-top h-2 w-2 img-fluid max-width: 25%; max-height:25%"  %>
+        <li class="list-group-item mb-3"><%= bookmark.comment %> <%= link_to "X", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove #{bookmark.movie.title} from your #{@list.name} list"}, class: 'btn btn-danger rounded-circle' %></li>
+      </div>
 
-<div>
-  <ul class=" row d-flex list-group mb-5">
-    <% @list.bookmarks.each do |bookmark| %>
-    <div class="col-6 justify-center">
-      <li class="list-group-item text-center"> <%= image_tag bookmark.movie.poster_url, alt: bookmark.movie.title, class: "movie-img rounded-top h-2 w-2 img-fluid max-width: 25%; max-height:25%"  %></li>
-      <li class="list-group-item mb-3"><%= bookmark.comment %> <%= link_to "X", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove #{bookmark.movie.title} from your #{@list.name} list"}, class: 'btn btn-danger rounded-circle' %></li>
-    </div>
-
-    <% end %>
-  <ul>
+      <% end %>
+    <%# <ul> %>
+  </div>
 </div>
-
-<%= link_to "add a bookmark", new_list_bookmark_path(@list), class: 'btn btn-success mb-1' %>
-
-<div>
-  <%= link_to "See all of your lists", root_path(@lists), class: 'btn btn-primary' %>
+<div class="d-flex justify-center">
+  <div>
+    <%= link_to "add a bookmark", new_list_bookmark_path(@list), class: 'btn btn-success mb-1' %>
+  </div>
+  <div>
+    <%= link_to "See all of your lists", root_path(@lists), class: 'btn btn-primary' %>
+  </div>
 </div>
