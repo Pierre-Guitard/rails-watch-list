@@ -1,6 +1,19 @@
-<h1>La show</h1>
 
-<p>name : <%= @list.name %></p>
-<%= link_to "See all of your lists", root_path(@lists) %>
+<h2 class="text-center"><%= @list.name %> list</h2>
 
-<%= link_to "add a movie", new_list_bookmark_path(@list) %>
+<div>
+  <ul class="list-group mb-5">
+    <% @list.bookmarks.each do |bookmark| %>
+    <li class="list-group-item text-center"><%= bookmark.movie.title %></li>
+    <li class="list-group-item mb-3"><%= bookmark.comment %> <%= link_to "X", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove #{bookmark.movie.title} from your #{@list.name} list"}, class: 'btn btn-danger rounded-circle' %></li>
+
+
+    <% end %>
+  <ul>
+</div>
+
+<%= link_to "add a bookmark", new_list_bookmark_path(@list), class: 'btn btn-success mb-1' %>
+
+<div>
+  <%= link_to "See all of your lists", root_path(@lists), class: 'btn btn-primary' %>
+</div>
